@@ -3,8 +3,11 @@
 import { AsyncStorage } from 'react-native';
 
 const deviceStorage = {
-	get(key) {
+	get(key, default) {
 		return AsyncStorage.getItem(key).then(value => {
+            if (value === null || value === undefined) {
+                return default;
+            }
 			return JSON.parse(value);
 		});
 	},

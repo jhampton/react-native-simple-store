@@ -19,9 +19,9 @@ npm install react-native-simple-store
 
 Save a key and associated value.
 
-`.get([String key]) -> Promise(value)`
+`.get([String key], [Object|String default]) -> Promise(value)`
 
-Get a value for the given key.
+Get a value for the given key optionally returning a default value if not found (null).
 
 `.update([String key], [Object|String value]) -> Promise(error)`
 
@@ -56,6 +56,10 @@ store
   .then(() => store.get('coffee'))
   .then(coffee => {
     console.assert(coffee === null);
+  })
+  .then(() => store.get('coffee',{ hasDefault: true }))
+  .then(coffee => {
+    console.assert(coffee.hasDefault === true);
   })
   .catch(error => {
     console.error(error.message);
